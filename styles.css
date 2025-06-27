@@ -835,6 +835,17 @@ body {
     }
 }
 
+@keyframes sparkle-burst {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--endX), var(--endY)) scale(0);
+        opacity: 0;
+    }
+}
+
 /* Easter Egg - Eagle flies when sun is clicked */
 .eagle-surprise {
     position: fixed;
