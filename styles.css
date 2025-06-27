@@ -1,0 +1,1073 @@
+:root {
+    --patriot-red: #dc143c;
+    --patriot-blue: #002868;
+    --patriot-white: #ffffff;
+    --star-gold: #ffd700;
+    --water-blue: #1e6091;
+    --sand-color: #f4a460;
+    --grass-green: #228b22;
+    --sunset-orange: #ff4500;
+    --purple: #8a2be2;
+    --pink: #ff1493;
+    --cyan: #00ced1;
+    --lime: #32cd32;
+    --magenta: #ff00ff;
+    --turquoise: #40e0d0;
+    --coral: #ff7f50;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow-x: hidden;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="%23dc143c" stroke="%23002868" stroke-width="2"/><text x="10" y="14" text-anchor="middle" fill="white" font-size="10">★</text></svg>'), auto;
+}
+
+/* Sky and Background */
+.scene-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, 
+        #87ceeb 0%, 
+        #ffa500 40%, 
+        #ff4500 60%, 
+        #191970 85%, 
+        #000080 100%);
+    overflow: hidden;
+}
+
+/* Stars */
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--star-gold);
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.3; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.5); }
+}
+
+/* Sun (Easter Egg) */
+.sun {
+    position: absolute;
+    top: 8%;
+    right: 10%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #ffd700 30%, #ffb347 70%, #ff8c00 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    animation: sunGlow 3s ease-in-out infinite alternate;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.sun:hover {
+    transform: scale(1.1);
+}
+
+.sun:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: 
+        linear-gradient(0deg, transparent 45%, rgba(255, 215, 0, 0.3) 49%, rgba(255, 215, 0, 0.3) 51%, transparent 55%),
+        linear-gradient(22.5deg, transparent 45%, rgba(255, 215, 0, 0.3) 49%, rgba(255, 215, 0, 0.3) 51%, transparent 55%),
+        linear-gradient(45deg, transparent 45%, rgba(255, 215, 0, 0.3) 49%, rgba(255, 215, 0, 0.3) 51%, transparent 55%),
+        linear-gradient(67.5deg, transparent 45%, rgba(255, 215, 0, 0.3) 49%, rgba(255, 215, 0, 0.3) 51%, transparent 55%);
+    border-radius: 50%;
+    animation: sunRays 6s linear infinite;
+}
+
+@keyframes sunGlow {
+    0% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+    100% { box-shadow: 0 0 60px rgba(255, 215, 0, 1); }
+}
+
+@keyframes sunRays {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Clouds */
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    animation: float 20s linear infinite;
+}
+
+.cloud:before, .cloud:after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+}
+
+.cloud1 {
+    width: 100px;
+    height: 40px;
+    top: 15%;
+    left: -150px;
+}
+
+.cloud1:before {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    left: 10px;
+}
+
+.cloud1:after {
+    width: 60px;
+    height: 40px;
+    top: -15px;
+    right: 10px;
+}
+
+@keyframes float {
+    0% { transform: translateX(-200px); }
+    100% { transform: translateX(calc(100vw + 200px)); }
+}
+
+/* Lake (improved from water) */
+.lake {
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background: linear-gradient(to bottom, 
+        rgba(30, 96, 145, 0.9) 0%, 
+        rgba(25, 78, 115, 1) 50%,
+        rgba(20, 60, 85, 1) 100%);
+    overflow: hidden;
+}
+
+.lake-wave {
+    position: absolute;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 1px;
+    animation: lake-ripple 4s ease-in-out infinite;
+}
+
+.wave1 {
+    width: 60px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.wave2 {
+    width: 80px;
+    top: 40%;
+    left: 30%;
+    animation-delay: 1s;
+}
+
+.wave3 {
+    width: 45px;
+    top: 60%;
+    left: 60%;
+    animation-delay: 2s;
+}
+
+.wave4 {
+    width: 70px;
+    top: 35%;
+    left: 80%;
+    animation-delay: 0.5s;
+}
+
+.wave5 {
+    width: 55px;
+    top: 75%;
+    left: 20%;
+    animation-delay: 1.5s;
+}
+
+.wave6 {
+    width: 35px;
+    top: 15%;
+    left: 50%;
+    animation-delay: 2.5s;
+}
+
+.wave7 {
+    width: 90px;
+    top: 85%;
+    left: 75%;
+    animation-delay: 3s;
+}
+
+.wave8 {
+    width: 25px;
+    top: 55%;
+    left: 5%;
+    animation-delay: 1.8s;
+}
+
+@keyframes lake-ripple {
+    0%, 100% { 
+        opacity: 0.4; 
+        transform: scaleX(1); 
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: scaleX(1.5); 
+    }
+}
+
+.beach {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to bottom, 
+        var(--sand-color) 0%, 
+        #daa520 100%);
+}
+
+/* Boats */
+.boat {
+    position: absolute;
+    bottom: 40%;
+    width: 60px;
+    height: 30px;
+    background: var(--patriot-red);
+    border-radius: 0 0 15px 15px;
+    animation: bobbing 4s ease-in-out infinite;
+}
+
+.boat:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 25px;
+    background: #8b4513;
+}
+
+.boat:after {
+    content: '⛵';
+    position: absolute;
+    top: -35px;
+    left: 55%;
+    font-size: 12px;
+}
+
+.boat1 {
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.boat2 {
+    left: 60%;
+    animation-delay: 2s;
+    background: var(--patriot-blue);
+}
+
+.boat3 {
+    left: 80%;
+    animation-delay: 1s;
+    background: var(--patriot-white);
+    border: 2px solid var(--patriot-blue);
+}
+
+@keyframes bobbing {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+/* Improved People with more human-like appearance */
+.person {
+    position: absolute;
+    bottom: 5%;
+    width: 25px;
+    height: 50px;
+    animation: wave-person 3s ease-in-out infinite;
+}
+
+.head {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: #ffdbac;
+    border-radius: 50%;
+    border: 1px solid #deb887;
+}
+
+.head:before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 2px;
+    height: 2px;
+    background: #333;
+    border-radius: 50%;
+    box-shadow: 5px 0 0 #333;
+}
+
+.head:after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 6px;
+    width: 2px;
+    height: 1px;
+    background: #8b4513;
+    border-radius: 1px;
+}
+
+.body {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 22px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.arm {
+    position: absolute;
+    top: 17px;
+    width: 4px;
+    height: 15px;
+    background: #ffdbac;
+    border-radius: 2px;
+    border: 1px solid #deb887;
+}
+
+.arm-left {
+    left: 4px;
+    transform: rotate(-15deg);
+    animation: wave-arm 2s ease-in-out infinite;
+}
+
+.arm-right {
+    right: 4px;
+    transform: rotate(15deg);
+    animation: wave-arm 2s ease-in-out infinite reverse;
+}
+
+@keyframes wave-arm {
+    0%, 100% { transform: rotate(-15deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+.leg {
+    position: absolute;
+    top: 36px;
+    width: 5px;
+    height: 14px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.leg-left {
+    left: 7px;
+}
+
+.leg-right {
+    right: 7px;
+}
+
+.person1 { 
+    left: 15%; 
+    animation-delay: 0s; 
+}
+
+.person1 .body { background: var(--coral); }
+.person1 .leg { background: var(--patriot-blue); }
+
+.person2 { 
+    left: 35%; 
+    animation-delay: 1s; 
+}
+
+.person2 .body { background: var(--lime); }
+.person2 .leg { background: #654321; }
+
+.person3 { 
+    left: 55%; 
+    animation-delay: 2s; 
+}
+
+.person3 .body { background: var(--purple); }
+.person3 .leg { background: #2f2f2f; }
+
+@keyframes wave-person {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    75% { transform: rotate(-2deg); }
+}
+
+/* Picnic Elements */
+.picnic-blanket {
+    position: absolute;
+    bottom: 8%;
+    left: 25%;
+    width: 80px;
+    height: 60px;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--patriot-red) 0px,
+        var(--patriot-red) 10px,
+        var(--patriot-white) 10px,
+        var(--patriot-white) 20px
+    );
+    border-radius: 10px;
+    animation: gentle-sway 4s ease-in-out infinite;
+}
+
+@keyframes gentle-sway {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(1deg); }
+}
+
+/* American Flags */
+.flag {
+    position: absolute;
+    bottom: 15%;
+    width: 30px;
+    height: 20px;
+    background: linear-gradient(
+        to bottom,
+        var(--patriot-red) 0%, var(--patriot-red) 15%,
+        var(--patriot-white) 15%, var(--patriot-white) 30%,
+        var(--patriot-red) 30%, var(--patriot-red) 45%,
+        var(--patriot-white) 45%, var(--patriot-white) 60%,
+        var(--patriot-red) 60%, var(--patriot-red) 75%,
+        var(--patriot-white) 75%, var(--patriot-white) 90%,
+        var(--patriot-red) 90%
+    );
+    animation: flag-wave 2s ease-in-out infinite;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.flag:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    background: var(--patriot-blue);
+}
+
+.flag:after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -2px;
+    width: 2px;
+    height: 40px;
+    background: #8b4513;
+}
+
+.flag1 { left: 10%; }
+.flag2 { left: 70%; }
+.flag3 { left: 90%; }
+
+@keyframes flag-wave {
+    0%, 100% { transform: skewX(0deg); }
+    25% { transform: skewX(5deg); }
+    75% { transform: skewX(-5deg); }
+}
+
+.flag:hover {
+    transform: scale(1.2);
+}
+
+/* Enhanced Fireworks with More Colors and Bursts */
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation: explode 3s ease-out infinite;
+}
+
+.firework-red {
+    background: var(--patriot-red);
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.firework-blue {
+    background: var(--patriot-blue);
+    top: 15%;
+    left: 60%;
+    animation-delay: 1s;
+}
+
+.firework-white {
+    background: var(--patriot-white);
+    top: 25%;
+    left: 80%;
+    animation-delay: 2s;
+}
+
+.firework-green {
+    background: var(--lime);
+    top: 18%;
+    left: 40%;
+    animation-delay: 0.5s;
+}
+
+.firework-purple {
+    background: var(--purple);
+    top: 22%;
+    left: 70%;
+    animation-delay: 1.5s;
+}
+
+.firework-orange {
+    background: var(--sunset-orange);
+    top: 12%;
+    left: 30%;
+    animation-delay: 2.5s;
+}
+
+.firework-pink {
+    background: var(--pink);
+    top: 28%;
+    left: 50%;
+    animation-delay: 3s;
+}
+
+.firework-cyan {
+    background: var(--cyan);
+    top: 16%;
+    left: 10%;
+    animation-delay: 0.8s;
+}
+
+.firework-magenta {
+    background: var(--magenta);
+    top: 14%;
+    left: 90%;
+    animation-delay: 2.2s;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+        box-shadow: 
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor,
+            0 0 0 0 currentColor;
+    }
+    25% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 
+            0 -80px 0 0 currentColor,
+            56px -56px 0 0 currentColor,
+            80px 0 0 0 currentColor,
+            56px 56px 0 0 currentColor,
+            0 80px 0 0 currentColor,
+            -56px 56px 0 0 currentColor,
+            -80px 0 0 0 currentColor,
+            -56px -56px 0 0 currentColor,
+            40px -69px 0 0 currentColor,
+            69px -40px 0 0 currentColor,
+            69px 40px 0 0 currentColor,
+            40px 69px 0 0 currentColor;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.8;
+        box-shadow: 
+            0 -120px 0 -15px currentColor,
+            85px -85px 0 -15px currentColor,
+            120px 0 0 -15px currentColor,
+            85px 85px 0 -15px currentColor,
+            0 120px 0 -15px currentColor,
+            -85px 85px 0 -15px currentColor,
+            -120px 0 0 -15px currentColor,
+            -85px -85px 0 -15px currentColor,
+            60px -104px 0 -10px currentColor,
+            104px -60px 0 -10px currentColor,
+            104px 60px 0 -10px currentColor,
+            60px 104px 0 -10px currentColor;
+    }
+    75% {
+        transform: scale(1.5);
+        opacity: 0.4;
+        box-shadow: 
+            0 -160px 0 -25px currentColor,
+            113px -113px 0 -25px currentColor,
+            160px 0 0 -25px currentColor,
+            113px 113px 0 -25px currentColor,
+            0 160px 0 -25px currentColor,
+            -113px 113px 0 -25px currentColor,
+            -160px 0 0 -25px currentColor,
+            -113px -113px 0 -25px currentColor,
+            80px -138px 0 -20px currentColor,
+            138px -80px 0 -20px currentColor,
+            138px 80px 0 -20px currentColor,
+            80px 138px 0 -20px currentColor;
+    }
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+        box-shadow: 
+            0 -200px 0 -40px transparent,
+            141px -141px 0 -40px transparent,
+            200px 0 0 -40px transparent,
+            141px 141px 0 -40px transparent,
+            0 200px 0 -40px transparent,
+            -141px 141px 0 -40px transparent,
+            -200px 0 0 -40px transparent,
+            -141px -141px 0 -40px transparent,
+            100px -173px 0 -35px transparent,
+            173px -100px 0 -35px transparent,
+            173px 100px 0 -35px transparent,
+            100px 173px 0 -35px transparent;
+    }
+}
+
+/* Water Reflections */
+.firework-reflection {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    bottom: 45%;
+    opacity: 0.6;
+    animation: explode-reflection 3s ease-out infinite;
+}
+
+.reflection-red {
+    background: var(--patriot-red);
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.reflection-blue {
+    background: var(--patriot-blue);
+    left: 60%;
+    animation-delay: 1s;
+}
+
+.reflection-white {
+    background: var(--patriot-white);
+    left: 80%;
+    animation-delay: 2s;
+}
+
+.reflection-green {
+    background: var(--lime);
+    left: 40%;
+    animation-delay: 0.5s;
+}
+
+.reflection-purple {
+    background: var(--purple);
+    left: 70%;
+    animation-delay: 1.5s;
+}
+
+.reflection-orange {
+    background: var(--sunset-orange);
+    left: 30%;
+    animation-delay: 2.5s;
+}
+
+@keyframes explode-reflection {
+    0% {
+        transform: scale(0) scaleY(-1);
+        opacity: 0.6;
+    }
+    25% {
+        transform: scale(0.8) scaleY(-1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1) scaleY(-1);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1.5) scaleY(-1);
+        opacity: 0;
+    }
+}
+
+/* Interactive Hover Effects */
+.interactive-firework {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px dashed rgba(255, 215, 0, 0.5);
+}
+
+.interactive-firework:hover {
+    background: var(--star-gold);
+    transform: scale(1.3);
+    animation: hover-explode 1s ease-out;
+}
+
+@keyframes hover-explode {
+    0% { transform: scale(1.3); box-shadow: 0 0 0 0 var(--star-gold); }
+    50% { transform: scale(1.8); box-shadow: 0 0 0 30px transparent; }
+    100% { transform: scale(1.3); box-shadow: 0 0 0 60px transparent; }
+}
+
+.hover-firework1 { top: 30%; left: 40%; }
+.hover-firework2 { top: 25%; left: 70%; }
+.hover-firework3 { top: 35%; left: 15%; }
+
+/* Game Elements - Catch the Sparklers (Made Easier) */
+.game-container {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+.game-score {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--star-gold);
+}
+
+.sparkler {
+    position: fixed;
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, var(--star-gold) 40%, #ffb347 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    animation: sparkle-fall 8s linear infinite;
+    box-shadow: 0 0 20px var(--star-gold), 0 0 40px rgba(255, 215, 0, 0.5);
+    border: 3px solid #fff;
+    z-index: 1500;
+    transition: transform 0.1s ease;
+}
+
+.sparkler:hover {
+    transform: scale(1.2);
+}
+
+.sparkler:before {
+    content: '✨';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    animation: sparkle-twinkle 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes sparkle-fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(calc(100vh + 100px)) rotate(360deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes sparkle-twinkle {
+    0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes sparkle-explosion {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3);
+    }
+}
+
+/* Easter Egg - Eagle flies when sun is clicked */
+.eagle-surprise {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+    z-index: 2000;
+    animation: eagle-fly 3s ease-in-out;
+    pointer-events: none;
+    opacity: 0;
+}
+
+@keyframes eagle-fly {
+    0% { 
+        opacity: 0; 
+        transform: translate(-200%, -50%) rotate(-45deg); 
+    }
+    20% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) rotate(0deg); 
+    }
+    80% { 
+        opacity: 1; 
+        transform: translate(-50%, -50%) rotate(0deg); 
+    }
+    100% { 
+        opacity: 0; 
+        transform: translate(200%, -50%) rotate(45deg); 
+    }
+}
+
+/* BBQ Smoke */
+.bbq {
+    position: absolute;
+    bottom: 12%;
+    left: 45%;
+    width: 30px;
+    height: 20px;
+    background: #333;
+    border-radius: 5px;
+}
+
+.smoke {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    width: 5px;
+    height: 5px;
+    background: rgba(128, 128, 128, 0.6);
+    border-radius: 50%;
+    animation: smoke-rise 3s ease-out infinite;
+}
+
+@keyframes smoke-rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-30px) scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-60px) scale(2);
+        opacity: 0;
+    }
+}
+
+/* Hot Air Balloon */
+.balloon {
+    position: absolute;
+    top: 10%;
+    right: 50%;
+    width: 40px;
+    height: 60px;
+    background: radial-gradient(circle, var(--pink) 30%, var(--cyan) 30%, var(--cyan) 60%, var(--lime) 60%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: balloon-float 8s ease-in-out infinite;
+}
+
+.balloon:after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 10px;
+    background: #8b4513;
+    border-radius: 2px;
+}
+
+@keyframes balloon-float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    33% { transform: translateY(-20px) translateX(10px); }
+    66% { transform: translateY(-10px) translateX(-5px); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sun {
+        width: 50px;
+        height: 50px;
+        top: 5%;
+        right: 5%;
+    }
+
+    .flag {
+        width: 20px;
+        height: 15px;
+    }
+
+    .boat {
+        width: 40px;
+        height: 20px;
+    }
+
+    .person {
+        width: 20px;
+        height: 40px;
+    }
+
+    .game-container {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .picnic-blanket {
+        width: 60px;
+        height: 40px;
+    }
+
+    .sparkler {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .firework {
+        width: 6px;
+        height: 6px;
+    }
+
+    .interactive-firework {
+        width: 20px;
+        height: 20px;
+    }
+
+    .game-container {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .sparkler {
+        width: 10px;
+        height: 10px;
+    }
+
+    .person {
+        width: 18px;
+        height: 35px;
+    }
+
+    .head {
+        width: 10px;
+        height: 10px;
+    }
+
+    .body {
+        width: 8px;
+        height: 16px;
+        top: 10px;
+    }
+
+    .arm {
+        width: 3px;
+        height: 10px;
+        top: 12px;
+    }
+
+    .leg {
+        width: 4px;
+        height: 10px;
+        top: 26px;
+    }
+}
+
+/* Animation Utilities */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Additional Utility Classes */
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+/* Performance Optimizations */
+.firework, .firework-reflection, .sparkler {
+    will-change: transform, opacity;
+}
+
+.sun, .cloud, .boat, .person {
+    will-change: transform;
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .firework {
+        border: 2px solid #000;
+    }
+    
+    .sparkler {
+        border: 2px solid #000;
+    }
+    
+    .interactive-firework {
+        border: 3px solid #000;
+    }
+}

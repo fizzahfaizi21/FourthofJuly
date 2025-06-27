@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4th of July Lakeside Celebration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="scene-container">
+        <!-- Sky Elements -->
+        <div class="sun" onclick="showEagle()" title="Click me for a surprise!"></div>
+        
+        <!-- Stars -->
+        <div class="star" style="top: 12%; left: 15%; animation-delay: 0s;"></div>
+        <div class="star" style="top: 8%; left: 25%; animation-delay: 0.5s;"></div>
+        <div class="star" style="top: 18%; left: 35%; animation-delay: 1s;"></div>
+        <div class="star" style="top: 10%; left: 45%; animation-delay: 1.5s;"></div>
+        <div class="star" style="top: 15%; left: 55%; animation-delay: 2s;"></div>
+        <div class="star" style="top: 5%; left: 65%; animation-delay: 0.3s;"></div>
+        <div class="star" style="top: 20%; left: 75%; animation-delay: 1.8s;"></div>
+        <div class="star" style="top: 12%; left: 85%; animation-delay: 0.8s;"></div>
+
+        <!-- Clouds -->
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud1" style="top: 20%; animation-delay: 10s; opacity: 0.6;"></div>
+
+        <!-- Hot Air Balloon -->
+        <div class="balloon"></div>
+
+        <!-- Fireworks -->
+        <div class="firework firework-red"></div>
+        <div class="firework firework-blue"></div>
+        <div class="firework firework-white"></div>
+        <div class="firework firework-green"></div>
+        <div class="firework firework-purple"></div>
+        <div class="firework firework-orange"></div>
+
+        <!-- Firework Reflections in Water -->
+        <div class="firework-reflection reflection-red"></div>
+        <div class="firework-reflection reflection-blue"></div>
+        <div class="firework-reflection reflection-white"></div>
+        <div class="firework-reflection reflection-green"></div>
+        <div class="firework-reflection reflection-purple"></div>
+        <div class="firework-reflection reflection-orange"></div>
+
+        <!-- Interactive Hover Fireworks -->
+        <div class="interactive-firework hover-firework1" title="Click for fireworks!"></div>
+        <div class="interactive-firework hover-firework2" title="Click for fireworks!"></div>
+        <div class="interactive-firework hover-firework3" title="Click for fireworks!"></div>
+
+        <!-- Lake -->
+        <div class="lake">
+            <div class="lake-wave wave1"></div>
+            <div class="lake-wave wave2"></div>
+            <div class="lake-wave wave3"></div>
+            <div class="lake-wave wave4"></div>
+            <div class="lake-wave wave5"></div>
+        </div>
+
+        <!-- Beach -->
+        <div class="beach"></div>
+
+        <!-- Boats -->
+        <div class="boat boat1"></div>
+        <div class="boat boat2"></div>
+        <div class="boat boat3"></div>
+
+        <!-- People -->
+        <div class="person person1">
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="arm arm-left"></div>
+            <div class="arm arm-right"></div>
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+        </div>
+        <div class="person person2">
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="arm arm-left"></div>
+            <div class="arm arm-right"></div>
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+        </div>
+        <div class="person person3">
+            <div class="head"></div>
+            <div class="body"></div>
+            <div class="arm arm-left"></div>
+            <div class="arm arm-right"></div>
+            <div class="leg leg-left"></div>
+            <div class="leg leg-right"></div>
+        </div>
+
+        <!-- Picnic Elements -->
+        <div class="picnic-blanket"></div>
+        <div class="bbq">
+            <div class="smoke" style="animation-delay: 0s;"></div>
+            <div class="smoke" style="animation-delay: 1s; left: 12px;"></div>
+            <div class="smoke" style="animation-delay: 2s; left: 18px;"></div>
+        </div>
+
+        <!-- American Flags -->
+        <div class="flag flag1 hvr-bounce" onclick="playAnthem()" title="Click to play the anthem!"></div>
+        <div class="flag flag2 hvr-bounce" onclick="playAnthem()" title="Click to play the anthem!"></div>
+        <div class="flag flag3 hvr-bounce" onclick="playAnthem()" title="Click to play the anthem!"></div>
+
+        <!-- Game Container -->
+        <div class="game-container">
+            <div class="game-score">Sparklers Caught: <span id="score">0</span></div>
+            <div style="font-size: 12px;">Click the falling sparklers!</div>
+        </div>
+
+        <!-- Eagle Easter Egg -->
+        <div class="eagle-surprise" id="eagle">🦅 FREEDOM!</div>
+    </div>
+
+    <script>
+// Game Logic
+        let score = 0;
+        let sparklerCount = 0;
+
+        function createSparkler() {
+            if (sparklerCount < 3) { // Limit concurrent sparklers
+                const sparkler = document.createElement('div');
+                sparkler.className = 'sparkler';
+                sparkler.style.position = 'fixed'; // Use fixed positioning
+                sparkler.style.left = Math.random() * (window.innerWidth - 40) + 20 + 'px';
+                sparkler.style.top = '-50px';
+                sparkler.style.zIndex = '1500'; // Ensure it's above other elements
+                
+                sparkler.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    score++;
+                    document.getElementById('score').textContent = score;
+                    
+                    // Create mini explosion effect
+                    const explosion = document.createElement('div');
+                    explosion.style.position = 'fixed';
+                    explosion.style.left = this.style.left;
+                    explosion.style.top = this.style.top;
+                    explosion.style.color = '#ffd700';
+                    explosion.style.fontSize = '30px';
+                    explosion.textContent = '✨💥';
+                    explosion.style.pointerEvents = 'none';
+                    explosion.style.zIndex = '2000';
+                    explosion.style.animation = 'sparkle-explosion 0.8s ease-out forwards';
+                    document.body.appendChild(explosion);
+                    
+                    setTimeout(() => explosion.remove(), 800);
+                    
+                    // Remove sparkler and decrease count
+                    this.remove();
+                    sparklerCount--;
+                };
+
+                // Add touch support for mobile
+                sparkler.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.click();
+                });
+
+                // Remove sparkler when it falls off screen
+                setTimeout(() => {
+                    if (document.body.contains(sparkler)) {
+                        sparkler.remove();
+                        sparklerCount--;
+                    }
+                }, 8000); // Give more time to catch
+
+                document.body.appendChild(sparkler);
+                sparklerCount++;
+            }
+        }
+
+        // Create sparklers more frequently
+        setInterval(createSparkler, 2000);
+
+        // Eagle Easter Egg Function
+        function showEagle() {
+            const eagle = document.getElementById('eagle');
+            eagle.style.opacity = '1';
+            eagle.style.animation = 'eagle-fly 3s ease-in-out';
+            
+            setTimeout(() => {
+                eagle.style.opacity = '0';
+            }, 3000);
+        }
+
+        // Flag Anthem Function
+        function playAnthem() {
+            const anthem = document.createElement('div');
+            anthem.style.position = 'fixed';
+            anthem.style.top = '50%';
+            anthem.style.left = '50%';
+            anthem.style.transform = 'translate(-50%, -50%)';
+            anthem.style.background = 'rgba(0, 0, 0, 0.9)';
+            anthem.style.color = 'white';
+            anthem.style.padding = '20px';
+            anthem.style.borderRadius = '10px';
+            anthem.style.zIndex = '3000';
+            anthem.style.textAlign = 'center';
+            anthem.style.fontSize = '18px';
+            anthem.innerHTML = '🎵 "O say can you see..." 🎵<br><small>The Star-Spangled Banner is playing!</small>';
+            anthem.style.animation = 'fadeIn 0.5s ease-in';
+            
+            document.body.appendChild(anthem);
+            
+            setTimeout(() => {
+                anthem.style.animation = 'fadeOut 0.5s ease-out';
+                setTimeout(() => anthem.remove(), 500);
+            }, 3000);
+        }
+
+        // Interactive hover effects for fireworks
+        document.querySelectorAll('.interactive-firework').forEach(firework => {
+            firework.addEventListener('click', function() {
+                // Create multiple sparkles on click with more variety
+                for(let i = 0; i < 12; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.style.position = 'absolute';
+                        sparkle.style.left = this.offsetLeft + 'px';
+                        sparkle.style.top = this.offsetTop + 'px';
+                        sparkle.style.width = '6px';
+                        sparkle.style.height = '6px';
+                        sparkle.style.background = ['#dc143c', '#002868', '#ffffff', '#ffd700', '#32cd32', '#ff1493', '#00ced1', '#ff4500'][Math.floor(Math.random() * 8)];
+                        sparkle.style.borderRadius = '50%';
+                        sparkle.style.pointerEvents = 'none';
+                        sparkle.style.zIndex = '1000';
+                        sparkle.style.boxShadow = '0 0 10px currentColor';
+                        
+                        const angle = (360 / 12) * i;
+                        const distance = 60 + Math.random() * 40;
+                        const radians = angle * Math.PI / 180;
+                        const endX = Math.cos(radians) * distance;
+                        const endY = Math.sin(radians) * distance;
+                        
+                        sparkle.style.animation = `sparkle-burst 1.5s ease-out forwards`;
+                        sparkle.style.setProperty('--endX', endX + 'px');
+                        sparkle.style.setProperty('--endY', endY + 'px');
+                        
+                        document.body.appendChild(sparkle);
+                        
+                        setTimeout(() => sparkle.remove(), 1500);
+                    }, i * 30);
+                }
+            });
+        });
+
+        // Add wind effect to flags
+        setInterval(() => {
+            document.querySelectorAll('.flag').forEach(flag => {
+                const intensity = 3 + Math.random() * 7;
+                flag.style.transform = `skewX(${intensity}deg)`;
+                setTimeout(() => {
+                    flag.style.transform = `skewX(-${intensity/2}deg)`;
+                }, 200);
+                setTimeout(() => {
+                    flag.style.transform = `skewX(0deg)`;
+                }, 400);
+            });
+        }, 3000 + Math.random() * 2000);
+
+        // Create flying birds occasionally
+        function createBird() {
+            const bird = document.createElement('div');
+            bird.textContent = '🦅';
+            bird.style.position = 'absolute';
+            bird.style.fontSize = '20px';
+            bird.style.top = (10 + Math.random() * 30) + '%';
+            bird.style.left = '-50px';
+            bird.style.animation = 'bird-fly 8s linear';
+            bird.style.zIndex = '500';
+            
+            document.body.appendChild(bird);
+            
+            setTimeout(() => bird.remove(), 8000);
+        }
+
+        // Create a bird every 10-15 seconds
+        setInterval(createBird, 10000 + Math.random() * 5000);
+
+        // Add weather effects - gentle breeze
+        setInterval(() => {
+            document.querySelectorAll('.person').forEach(person => {
+                person.style.transform = `rotate(${Math.random() * 2 - 1}deg)`;
+            });
+        }, 2000);
+
+        // Responsive touch events for mobile
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.interactive-firework, .flag, .sun').forEach(element => {
+                element.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.click();
+                });
+            });
+        }
+
+        // Initialize scene
+        console.log("🎆 4th of July Lakeside Celebration Loaded! 🎆");
+        console.log("Features:");
+        console.log("- Click flags to play anthem");
+        console.log("- Click golden circles for fireworks");
+        console.log("- Catch falling sparklers for points");
+        console.log("- Click the sun for eagle surprise");
+    </script>
+</body>
+</html>
