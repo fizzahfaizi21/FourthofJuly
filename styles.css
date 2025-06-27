@@ -758,50 +758,11 @@ body {
 .hover-firework2 { top: 25%; left: 70%; }
 .hover-firework3 { top: 35%; left: 15%; }
 
-/* Game Elements - Catch the Sparklers (Made Easier) */
-.game-container {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 15px;
-    border-radius: 10px;
-    z-index: 1000;
-}
 
 .game-score {
     font-size: 18px;
     margin-bottom: 10px;
     color: var(--star-gold);
-}
-
-.sparkler {
-    position: fixed;
-    width: 25px;
-    height: 25px;
-    background: radial-gradient(circle, var(--star-gold) 40%, #ffb347 100%);
-    border-radius: 50%;
-    cursor: pointer;
-    animation: sparkle-fall 8s linear infinite;
-    box-shadow: 0 0 20px var(--star-gold), 0 0 40px rgba(255, 215, 0, 0.5);
-    border: 3px solid #fff;
-    z-index: 1500;
-    transition: transform 0.1s ease;
-}
-
-.sparkler:hover {
-    transform: scale(1.2);
-}
-
-.sparkler:before {
-    content: '✨';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 12px;
-    animation: sparkle-twinkle 0.5s ease-in-out infinite alternate;
 }
 
 @keyframes sparkle-fall {
@@ -979,10 +940,6 @@ body {
         height: 40px;
     }
 
-    .sparkler {
-        width: 12px;
-        height: 12px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -994,16 +951,6 @@ body {
     .interactive-firework {
         width: 20px;
         height: 20px;
-    }
-
-    .game-container {
-        font-size: 12px;
-        padding: 8px;
-    }
-
-    .sparkler {
-        width: 10px;
-        height: 10px;
     }
 
     .person {
@@ -1051,7 +998,7 @@ body {
 }
 
 /* Performance Optimizations */
-.firework, .firework-reflection, .sparkler {
+.firework, .firework-reflection {
     will-change: transform, opacity;
 }
 
@@ -1071,10 +1018,6 @@ body {
 /* High Contrast Mode Support */
 @media (prefers-contrast: high) {
     .firework {
-        border: 2px solid #000;
-    }
-    
-    .sparkler {
         border: 2px solid #000;
     }
     

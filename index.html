@@ -107,77 +107,11 @@
         <div class="flag flag2 hvr-bounce" onclick="playAnthem()" title="Click to play the anthem!"></div>
         <div class="flag flag3 hvr-bounce" onclick="playAnthem()" title="Click to play the anthem!"></div>
 
-        <!-- Game Container -->
-        <div class="game-container">
-            <div class="game-score">Sparklers Caught: <span id="score">0</span></div>
-            <div style="font-size: 12px;">Click the falling sparklers!</div>
-        </div>
-
         <!-- Eagle Easter Egg -->
         <div class="eagle-surprise" id="eagle">🦅 FREEDOM!</div>
     </div>
 
     <script>
-// Game Logic
-        let score = 0;
-        let sparklerCount = 0;
-
-        function createSparkler() {
-            if (sparklerCount < 3) { // Limit concurrent sparklers
-                const sparkler = document.createElement('div');
-                sparkler.className = 'sparkler';
-                sparkler.style.position = 'fixed'; // Use fixed positioning
-                sparkler.style.left = Math.random() * (window.innerWidth - 40) + 20 + 'px';
-                sparkler.style.top = '-50px';
-                sparkler.style.zIndex = '1500'; // Ensure it's above other elements
-                
-                sparkler.onclick = function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    score++;
-                    document.getElementById('score').textContent = score;
-                    
-                    // Create mini explosion effect
-                    const explosion = document.createElement('div');
-                    explosion.style.position = 'fixed';
-                    explosion.style.left = this.style.left;
-                    explosion.style.top = this.style.top;
-                    explosion.style.color = '#ffd700';
-                    explosion.style.fontSize = '30px';
-                    explosion.textContent = '✨💥';
-                    explosion.style.pointerEvents = 'none';
-                    explosion.style.zIndex = '2000';
-                    explosion.style.animation = 'sparkle-explosion 0.8s ease-out forwards';
-                    document.body.appendChild(explosion);
-                    
-                    setTimeout(() => explosion.remove(), 800);
-                    
-                    // Remove sparkler and decrease count
-                    this.remove();
-                    sparklerCount--;
-                };
-
-                // Add touch support for mobile
-                sparkler.addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    this.click();
-                });
-
-                // Remove sparkler when it falls off screen
-                setTimeout(() => {
-                    if (document.body.contains(sparkler)) {
-                        sparkler.remove();
-                        sparklerCount--;
-                    }
-                }, 8000); // Give more time to catch
-
-                document.body.appendChild(sparkler);
-                sparklerCount++;
-            }
-        }
-
-        // Create sparklers more frequently
-        setInterval(createSparkler, 2000);
 
         // Eagle Easter Egg Function
         function showEagle() {
@@ -225,8 +159,8 @@
                         sparkle.style.position = 'absolute';
                         sparkle.style.left = this.offsetLeft + 'px';
                         sparkle.style.top = this.offsetTop + 'px';
-                        sparkle.style.width = '6px';
-                        sparkle.style.height = '6px';
+                        sparkle.style.width = '12px';
+                        sparkle.style.height = '12px';
                         sparkle.style.background = ['#dc143c', '#002868', '#ffffff', '#ffd700', '#32cd32', '#ff1493', '#00ced1', '#ff4500'][Math.floor(Math.random() * 8)];
                         sparkle.style.borderRadius = '50%';
                         sparkle.style.pointerEvents = 'none';
@@ -307,7 +241,6 @@
         console.log("Features:");
         console.log("- Click flags to play anthem");
         console.log("- Click golden circles for fireworks");
-        console.log("- Catch falling sparklers for points");
         console.log("- Click the sun for eagle surprise");
     </script>
 </body>
